@@ -10,7 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
+void    handler(char *pid, char *str);
 
+int main(int argc, char **argv)
+{
+    signal(SIGUSR1, acknowledg_handler);
+    if (argc != 3)
+        exit(0);
+    handler(argv[1], argv[2]);
+    return (0);
+}
 static void	acknowledg_handler(int sig)
 {
 	(void)sig;
@@ -75,11 +84,11 @@ void    handler(char *pid, char *str)
 }    
 
 
-int main(int argc, char **argv)
-{
-    signal(SIGUSR1, acknowledg_handler);
-    if (argc != 3)
-        exit(0);
-    handler(argv[1], argv[2]);
-    return (0);
-}
+// int main(int argc, char **argv)
+// {
+//     signal(SIGUSR1, acknowledg_handler);
+//     if (argc != 3)
+//         exit(0);
+//     handler(argv[1], argv[2]);
+//     return (0);
+// }

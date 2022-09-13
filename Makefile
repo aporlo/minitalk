@@ -16,10 +16,9 @@ SERVER  = server
 CLIENT	= client
 SRCS_SER = server.c
 SRCS_CNT = client.c
-SRCS	= ft_printf.c \
-		ft_putnbr.c \
-		ft_put_str.c
-
+SRCS	= ft_atoi.c \
+		ft_putnbr_fd.c \
+		
 # SRCS_B	= ft_lstnew.c \
 # 	  ft_lstadd_front.c \
 # 	  ft_lstlast.c \
