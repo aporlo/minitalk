@@ -11,29 +11,34 @@
 /* ************************************************************************** */
 #include "minitalk.h"
 
-int	ft_atoi(const char *s)
+static void	acknowledg_handler(int sig)
 {
-	unsigned int	n;
-	int				i;
-	int				sign;
-
-	i = 0;
-	n = 0;
-	sign = 1;
-	while ((s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-		|| s[i] == '\f' || s[i] == '\v' || s[i] == '\r')
-		i++;
-	if (s[i] == '-')
-		sign = -1;
-	if (s[i] == '-' || s[i] == '+')
-		i++;
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		n = n * 10 + (s[i] - '0');
-		i++;
-	}
-	return ((int)(sign * n));
+	(void)sig;
 }
+
+// int	ft_atoi(const char *s)
+// {
+// 	unsigned int	n;
+// 	int				i;
+// 	int				sign;
+
+// 	i = 0;
+// 	n = 0;
+// 	sign = 1;
+// 	while ((s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+// 		|| s[i] == '\f' || s[i] == '\v' || s[i] == '\r')
+// 		i++;
+// 	if (s[i] == '-')
+// 		sign = -1;
+// 	if (s[i] == '-' || s[i] == '+')
+// 		i++;
+// 	while (s[i] >= '0' && s[i] <= '9')
+// 	{
+// 		n = n * 10 + (s[i] - '0');
+// 		i++;
+// 	}
+// 	return ((int)(sign * n));
+// }
 
 void    send_binary(int pid, unsigned char byte)
 {
@@ -72,6 +77,7 @@ void    handler(char *pid, char *str)
 
 int main(int argc, char **argv)
 {
+    signal(SIGUSR1, acknowledg_handler);
     if (argc != 3)
         exit(0);
     handler(argv[1], argv[2]);
