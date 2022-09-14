@@ -6,7 +6,7 @@
 /*   By: lsomrat <lsomrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 03:15:00 by lsomrat           #+#    #+#             */
-/*   Updated: 2022/09/08 03:15:20 by lsomrat          ###   ########.fr       */
+/*   Updated: 2022/09/14 17:59:40 by lsomrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@
 # include <sys/types.h>
 # include <signal.h>
 
-struct  sig_character
+typedef struct s_sigcharacter
 {
-    char    c;
-    int         bit;
-};
+	char	c;
+	int		bit;
+}	t_sigcharacter;
 
-
-void    ft_putnbr_fd(int n, int fd);
-int     ft_atoi(const char *s);
+void	ft_putnbr_fd(int n, int fd);
+int		ft_atoi(const char *s);
 
 #endif

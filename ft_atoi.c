@@ -6,7 +6,7 @@
 /*   By: lsomrat <lsomrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 23:44:40 by lsomrat           #+#    #+#             */
-/*   Updated: 2022/09/12 23:44:59 by lsomrat          ###   ########.fr       */
+/*   Updated: 2022/09/14 17:32:25 by lsomrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
@@ -34,4 +34,3 @@ int	ft_atoi(const char *s)
 	}
 	return ((int)(sign * n));
 }
-
