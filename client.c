@@ -6,7 +6,7 @@
 /*   By: lsomrat <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:28:36 by lsomrat           #+#    #+#             */
-/*   Updated: 2022/09/14 17:44:06 by lsomrat          ###   ########.fr       */
+/*   Updated: 2022/09/14 20:00:50 by lsomrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		handler(char *pid, char *str);
 int	main(int argc, char **argv)
 {
 	signal(SIGUSR1, acknowledg_handler);
-	if (argc != 3)
+	if (argc < 3)
 		exit(0);
 	handler(argv[1], argv[2]);
 	return (0);
@@ -28,8 +28,7 @@ int	main(int argc, char **argv)
 static void	acknowledg_handler(int sig)
 {
 	(void)sig;
-	if (sig == SIGUSR1)
-		write(1, "1", 1);
+	write(1, "1", 1);
 }
 
 void	send_binary(int pid, unsigned char byte)
@@ -42,12 +41,18 @@ void	send_binary(int pid, unsigned char byte)
 		if (!(byte & (1 << i--)))
 		{
 			if (kill(pid, SIGUSR1) == -1)
+			{
+				write(1, "bad pid\n", 9);
 				exit(1);
+			}
 		}
 		else
 		{
 			if (kill(pid, SIGUSR2) == -1)
+			{
+				write(1, "bad pid\n", 9);
 				exit(1);
+			}
 		}
 		usleep(500);
 	}
@@ -58,10 +63,11 @@ void	handler(char *pid, char *str)
 	int	process_id;
 
 	process_id = ft_atoi(pid);
-	while (*str)
+	if (process_id > 0)
 	{
-		send_binary(process_id, *str);
-		++str;
-	}
-	send_binary(process_id, *str);
+		while (*str)
+		{
+			send_binary(process_id, *str++);
+		}
+	}	
 }
